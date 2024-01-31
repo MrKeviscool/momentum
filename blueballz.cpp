@@ -2,6 +2,8 @@
 #include <math.h>
 #include <SFML/Graphics.hpp>
 #include <stdbool.h>
+#include "objects.h"
+
 #define ballsize 30
 #define speedcap 3
 #define decreasespeed 0.02
@@ -16,9 +18,11 @@ sf::Vector2f bpos;
 sf::Vector2f bspeed;
 sf::CircleShape ball(ballsize);
 
+
 void calculaterotation(), display(sf::RenderWindow &window), logic(), delay();
 int main(){
     /////SETUP/////////
+    loadobjects();
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Blue Ballz - MrKeviscool", sf::Style::Fullscreen);
     if(!balltex.loadFromFile("./textures/blueball.png")){
         std::cout << "error loading texture\n";
@@ -26,7 +30,7 @@ int main(){
     }
     balltex.setSmooth(true);
     ball.setTexture(&balltex);
-    bpos = sf::Vector2f(100, 540);
+    bpos = sf::Vector2f(100, 200);
     ball.setOrigin(ballsize, ballsize);
     ball.setPosition(bpos);
     ///////END SETUP//////////
@@ -83,6 +87,7 @@ void logic(){
 void display(sf::RenderWindow &window){
     window.clear(sf::Color::Black);
     window.draw(ball);
+    window.draw(Floor);
     window.display();
 }
 
