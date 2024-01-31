@@ -77,7 +77,6 @@ void logic(){
         }
     }
     //ball.move(bspeed);
-    //ball.setPosition(500, 500);
     calculaterotation();
 }
 
