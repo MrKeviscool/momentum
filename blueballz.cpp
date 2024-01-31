@@ -1,7 +1,8 @@
 #include <iostream>
-#include <math.h>
 #include <SFML/Graphics.hpp>
 #include <stdbool.h>
+#include <math.h>
+#include <vector>
 #include "objects.h"
 
 #define gravity 0.0784
@@ -89,7 +90,7 @@ void logic(){
 void display(sf::RenderWindow &window){
     window.clear(sf::Color::Black);
     window.draw(ball);
-    window.draw(Floor);
+    window.draw(*objects[0]);
     window.display();
 }
 
