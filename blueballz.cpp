@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "objects.h"
 
+#define gravity 0.0784
 #define ballsize 30
 #define speedcap 3
 #define decreasespeed 0.02
@@ -81,6 +82,7 @@ void logic(){
         }
     }
     //ball.move(bspeed);
+    bspeed.y -= gravity;
     calculaterotation();
 }
 
