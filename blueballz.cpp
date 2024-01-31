@@ -24,7 +24,7 @@ int main(){
         std::cout << "error loading texture\n";
         return 0;
     }
-    //balltex.setSmooth(true);
+    balltex.setSmooth(true);
     ball.setTexture(&balltex);
     bpos = sf::Vector2f(100, 540);
     ball.setOrigin(ballsize, ballsize);
@@ -76,7 +76,7 @@ void logic(){
             bspeed.x = 0.0;
         }
     }
-    ball.move(bspeed);
+    //ball.move(bspeed);
     //ball.setPosition(500, 500);
     calculaterotation();
 }
