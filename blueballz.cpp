@@ -100,7 +100,15 @@ void logic(){
             }
         }
 
-        
+        if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
+            if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
+                float move_amount = (objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
+                inleftwall = true;
+                for(int o = 0; o < objects.size(); o++){
+                    objects[o]->move(move_amount,0);
+                }
+            }
+        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall){
         bspeed.x+=increasespeed;
