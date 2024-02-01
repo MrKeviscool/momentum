@@ -5,15 +5,17 @@
 #include <vector>
 #include "objects.h"
 
+#define screenwidth 1920
+#define screenheight 1080
 #define gravity 0.0784
 #define ballsize 30
-#define speedcap 3
-#define decreasespeed 0.02
-#define increasespeed 0.05
+#define speedcap 5
+#define decreasespeed 0.04
+#define increasespeed 0.10
 #define fps 0.008 //0.008 = 125
 
 float rotation = 0;
-bool touching_ground = true;
+bool touching_ground = false;
 sf::Texture balltex;
 
 sf::Vector2f bpos;
@@ -32,9 +34,9 @@ int main(){
     }
     balltex.setSmooth(true);
     ball.setTexture(&balltex);
-    bpos = sf::Vector2f(1920/2, 980-(ballsize)/2);
+    //bpos = sf::Vector2f(1920/2, 1080/2/*1080-(100+(ballsize/2) )+10*/);
     ball.setOrigin(ballsize, ballsize);
-    ball.setPosition(bpos);
+    ball.setPosition(1920/2, 1080/2);
     ///////END SETUP//////////
         while(window.isOpen()){ 
         sf::Event event;
@@ -64,6 +66,33 @@ void calculaterotation(){
 }
 
 void logic(){
+    touching_ground = false;
+    for(int s = 0; s < objects.size(); s++){
+        if(screenwidth/2+(ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2+(ballsize/2) > objects[s]->getPosition().x){
+            //std::cout << "within x \n";
+            if((screenheight/2)+ballsize+5 < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize+5 > objects[s]->getPosition().y){
+                //std::cout<<"in bounding box!! \n";
+                float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
+                for(int o = 0; o < objects.size(); o++){
+                    objects[o]->move(0, move_amount);
+                }
+                bspeed.y = 0;
+                touching_ground = true;
+                //std::cout <<"touching\n"; //ball pos 570
+
+            }
+            else if(objects[s]->getPosition().y == 570){
+                touching_ground = true;
+                bspeed.y = 0;
+            }
+            
+        }
+        else if (!touching_ground){
+            bspeed.y+=gravity;
+        }
+        
+        //std::cout << "size: " << objects[s]->getSize().x << "\n";
+    }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap){
         bspeed.x+=increasespeed;
     }
@@ -85,7 +114,6 @@ void logic(){
     for(int i = 0; i < objects.size(); i++){
         objects[i]->move(-bspeed);
     }
-    //bspeed.y += gravity;
     calculaterotation();
 }
 
