@@ -69,11 +69,10 @@ void calculaterotation(){
 
 void logic(){
     touching_ground = false;
+    bool inwall = false;
     for(int s = 0; s < objects.size(); s++){
         if(screenwidth/2+(ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2+(ballsize/2) > objects[s]->getPosition().x){
-            //std::cout << "within x \n";
             if((screenheight/2)+ballsize+5 < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize+5 > objects[s]->getPosition().y){
-                //std::cout<<"in bounding box!! \n";
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0, move_amount);
@@ -90,8 +89,15 @@ void logic(){
         else if (!touching_ground){
             bspeed.y+=gravity;
         }
+
+        if((screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x && (screenwidth/2) + (ballsize/2) < objects[s]->getPosition().x + objects[s]->getSize().x){
+            std::cout << "in wall\n";
+            inwall = true;
+        }
+        else if (!inwall){
+           std::cout << "not in wall wall\n"; 
+        }
         
-        //std::cout << "size: " << objects[s]->getSize().x << "\n";
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap){
         bspeed.x+=increasespeed;
