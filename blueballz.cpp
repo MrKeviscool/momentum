@@ -69,9 +69,9 @@ void calculaterotation(){
 
 void logic(){
     touching_ground = false;
-    bool inwall = false;
+    bool inrightwall = false, inleftwall = false;
     for(int s = 0; s < objects.size(); s++){
-        if(screenwidth/2+(ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2+(ballsize/2) > objects[s]->getPosition().x){
+        if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize+5 < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize+5 > objects[s]->getPosition().y){
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
@@ -89,17 +89,20 @@ void logic(){
         else if (!touching_ground){
             bspeed.y+=gravity;
         }
+        
+        if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
+            if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
+                inrightwall = true;
+                float move_amount = -(objects[s]->getPosition().x - ((screenwidth/2)+ballsize));
+                for(int o = 0; o < objects.size(); o++){
+                    objects[o]->move(move_amount,0);
+                }
+            }
+        }
 
-        if((screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x && (screenwidth/2) + (ballsize/2) < objects[s]->getPosition().x + objects[s]->getSize().x){
-            std::cout << "in wall\n";
-            inwall = true;
-        }
-        else if (!inwall){
-           std::cout << "not in wall wall\n"; 
-        }
         
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall){
         bspeed.x+=increasespeed;
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap){
