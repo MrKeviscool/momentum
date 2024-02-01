@@ -32,7 +32,7 @@ int main(){
     }
     balltex.setSmooth(true);
     ball.setTexture(&balltex);
-    bpos = sf::Vector2f(100, 200);
+    bpos = sf::Vector2f(1920/2, 980-(ballsize)/2);
     ball.setOrigin(ballsize, ballsize);
     ball.setPosition(bpos);
     ///////END SETUP//////////
@@ -82,15 +82,19 @@ void logic(){
             bspeed.x = 0.0;
         }
     }
-    //ball.move(bspeed);
-    bspeed.y -= gravity;
+    for(int i = 0; i < objects.size(); i++){
+        objects[i]->move(-bspeed);
+    }
+    //bspeed.y += gravity;
     calculaterotation();
 }
 
 void display(sf::RenderWindow &window){
     window.clear(sf::Color::Black);
     window.draw(ball);
-    window.draw(*objects[0]);
+    for(int i = 0; i < objects.size(); i++){
+        window.draw(*objects[i]);
+    }
     window.display();
 }
 
