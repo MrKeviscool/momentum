@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <math.h>
 #include <vector>
+#include <chrono>
+#include <thread>
 #include "objects.h"
 
 #define screenwidth 1920
@@ -12,7 +14,7 @@
 #define speedcap 5
 #define decreasespeed 0.04
 #define increasespeed 0.10
-#define fps 0.008 //0.008 = 125
+#define fps 125
 
 float rotation = 0;
 bool touching_ground = false;
@@ -78,8 +80,6 @@ void logic(){
                 }
                 bspeed.y = 0;
                 touching_ground = true;
-                //std::cout <<"touching\n"; //ball pos 570
-
             }
             else if(objects[s]->getPosition().y == 570){
                 touching_ground = true;
@@ -127,8 +127,6 @@ void display(sf::RenderWindow &window){
 }
 
 void delay(){ 
-    unsigned long tix = (fps * CLOCKS_PER_SEC);
-    unsigned long newtix = clock() + tix;
-    while (newtix > clock()){}
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000/fps));
     return;
 }
