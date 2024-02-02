@@ -122,7 +122,6 @@ void logic(){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&touching_ground){
         bspeed.y -= jumpheight;
         touching_ground = false;
-        std::cout << "bspeed: " << bspeed.y <<"\n";
     }
     else if(bspeed.x > 0 && touching_ground){
         bspeed.x -= decreasespeed;
