@@ -13,7 +13,7 @@
 #define ballsize 30
 #define speedcap 10
 #define decreasespeed 0.04
-#define increasespeed 0.10
+#define increasespeed 0.1
 #define jumpheight 6
 #define fps 125
 
