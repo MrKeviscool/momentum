@@ -12,8 +12,8 @@
 #define gravity 0.2//0.0784
 #define ballsize 30
 #define speedcap 10
-#define decreasespeed 0.04
-#define increasespeed 0.1
+#define decreasespeed 0.02
+#define increasespeed 0.05
 #define jumpheight 6
 #define fps 125
 
@@ -96,6 +96,7 @@ void logic(){
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(move_amount,0);
                 }
+                bspeed.x = 0;
             }
         }
 
@@ -106,6 +107,7 @@ void logic(){
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(move_amount,0);
                 }
+                bspeed.x = 0;
             }
         }
     }
