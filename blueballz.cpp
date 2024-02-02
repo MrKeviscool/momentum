@@ -9,9 +9,9 @@
 
 #define screenwidth 1920
 #define screenheight 1080
-#define gravity 0.0784
+#define gravity 0.2//0.0784
 #define ballsize 30
-#define speedcap 5
+#define speedcap 10
 #define decreasespeed 0.04
 #define increasespeed 0.10
 #define jumpheight 6
@@ -75,7 +75,7 @@ void logic(){
     bool inrightwall = false, inleftwall = false;
     for(int s = 0; s < objects.size(); s++){
         if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
-            if((screenheight/2)+ballsize+5 < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize+5 > objects[s]->getPosition().y){
+            if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0, move_amount);
@@ -83,16 +83,12 @@ void logic(){
                 bspeed.y = 0;
                 touching_ground = true;
             }
-            else if(objects[s]->getPosition().y == 570){
+            /*else if(objects[s]->getPosition().y == 570){
                 touching_ground = true;
                 bspeed.y = 0;
-            }
+            }*/
             
         }
-        else if (!touching_ground){
-            bspeed.y+=gravity;
-        }
-        
         if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
             if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
                 inrightwall = true;
@@ -113,6 +109,10 @@ void logic(){
             }
         }
     }
+    if (!touching_ground){
+        bspeed.y+=gravity;
+    }
+        
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall){
         bspeed.x+=increasespeed;
     }
@@ -121,6 +121,8 @@ void logic(){
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&touching_ground){
         bspeed.y -= jumpheight;
+        touching_ground = false;
+        std::cout << "bspeed: " << bspeed.y <<"\n";
     }
     else if(bspeed.x > 0 && touching_ground){
         bspeed.x -= decreasespeed;
