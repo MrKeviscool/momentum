@@ -130,10 +130,10 @@ void logic(){
         bspeed.y+=gravity;
     }
         
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall &&touching_ground){
         bspeed.x+=increasespeed;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap && !inleftwall){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap && !inleftwall &&touching_ground){
        bspeed.x-=increasespeed;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&touching_ground){

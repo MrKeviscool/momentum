@@ -8,14 +8,14 @@ sf::RectangleShape leftwall(sf::Vector2f(50, 300));
 sf::RectangleShape box1(sf::Vector2f(50,50));
 sf::RectangleShape lowfloor(sf::Vector2f(300, 50));
 sf::RectangleShape box2(sf::Vector2f(50, 50));
-std::vector<sf::RectangleShape*> objects = {&Floor, &wallright, &anotherfloor, &leftwall, &box1, &lowfloor, &box2};
+std::vector<sf::RectangleShape*> objects = {&Floor, &wallright, &anotherfloor, &leftwall, &box1, &box2};
 
 void loadobjects(){
     Floor.setFillColor(sf::Color::Green);
     Floor.setPosition(-500, 1000); 
     wallright.setPosition(1920 - 300, 0);
     wallright.setFillColor(sf::Color::Red);
-    anotherfloor.setPosition(600, 800);
+    anotherfloor.setPosition(650, 800);
     leftwall.setPosition(-500, 700);
     box1.setPosition(400, 1000-50);
     box2.setPosition(450, 1000-100);
