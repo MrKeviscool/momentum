@@ -14,6 +14,7 @@
 #define speedcap 5
 #define decreasespeed 0.04
 #define increasespeed 0.10
+#define jumpheight 6
 #define fps 125
 
 float rotation = 0;
@@ -113,8 +114,11 @@ void logic(){
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall){
         bspeed.x+=increasespeed;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap && !inleftwall){
        bspeed.x-=increasespeed;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&touching_ground){
+        bspeed.y -= jumpheight;
     }
     else if(bspeed.x > 0 && touching_ground){
         bspeed.x -= decreasespeed;
