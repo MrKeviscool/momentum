@@ -1,31 +1,54 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-sf::RectangleShape Floor;
-sf::RectangleShape rightwall;
-sf::RectangleShape leftwall;
-sf::RectangleShape obj1;
-
 std::vector<sf::RectangleShape *> objects;
 
 void loadlevel(int level)
 {
     if (level == 1)
     {
-        Floor.setSize(sf::Vector2f(2500, 80));
-        Floor.setFillColor(sf::Color::Green);
-        Floor.setPosition(-500, 1000);
+        sf::RectangleShape *Floor = new sf::RectangleShape();
+        sf::RectangleShape *rightwall = new sf::RectangleShape();
+        sf::RectangleShape *leftwall = new sf::RectangleShape();
+        sf::RectangleShape *obj1 = new sf::RectangleShape();
 
-        rightwall.setSize((sf::Vector2f(200, 1080)));
-        rightwall.setPosition(1920 - 300, 0);
-        rightwall.setFillColor(sf::Color::Red);
+        Floor->setSize(sf::Vector2f(2500, 80));
+        Floor->setFillColor(sf::Color::Green);
+        Floor->setPosition(-500, 1000);
 
-        leftwall.setSize(sf::Vector2f(50, 300));
-        leftwall.setPosition(-500, 700);
+        rightwall->setSize((sf::Vector2f(200, 1080)));
+        rightwall->setPosition(1920 - 300, 0);
+        rightwall->setFillColor(sf::Color::Red);
 
-        obj1.setSize(sf::Vector2f(500, 50));
-        obj1.setPosition(650, 800);
+        leftwall->setSize(sf::Vector2f(50, 300));
+        leftwall->setPosition(-500, 700);
 
-        objects = {&Floor, &obj1, &leftwall, &rightwall};
+        obj1->setSize(sf::Vector2f(500, 50));
+        obj1->setPosition(650, 800);
+
+        objects = {Floor, obj1, leftwall, rightwall};
+    }
+    else if(level == 2){
+        sf::RectangleShape *Floor = new sf::RectangleShape();
+        sf::RectangleShape *rightwall = new sf::RectangleShape();
+        sf::RectangleShape *leftwall = new sf::RectangleShape();
+        sf::RectangleShape *obj1 = new sf::RectangleShape();
+
+        Floor->setSize(sf::Vector2f(2500, 20));
+        Floor->setFillColor(sf::Color::Green);
+        Floor->setPosition(-500, 1000);
+
+        rightwall->setSize((sf::Vector2f(200, 1080)));
+        rightwall->setPosition(1920 - 300, 0);
+        rightwall->setFillColor(sf::Color::Blue);
+
+        leftwall->setSize(sf::Vector2f(50, 300));
+        leftwall->setPosition(-500, 700);
+        leftwall->setFillColor(sf::Color(158, 66, 245));
+
+        obj1->setSize(sf::Vector2f(300, 50));
+        obj1->setPosition(650, 900);
+
+        objects = {Floor, obj1, leftwall, rightwall};
     }
 }
