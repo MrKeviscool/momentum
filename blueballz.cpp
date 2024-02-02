@@ -9,7 +9,7 @@
 
 #define screenwidth 1920
 #define screenheight 1080
-#define gravity 0.2//0.0784
+#define gravity 0.15//0.0784
 #define ballsize 30
 #define speedcap 10
 #define decreasespeed 0.02
@@ -74,6 +74,8 @@ void logic(){
     touching_ground = false;
     bool inrightwall = false, inleftwall = false;
     for(int s = 0; s < objects.size(); s++){
+
+        //bottom collison
         if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
@@ -89,6 +91,7 @@ void logic(){
             }*/
             
         }
+        //right collison
         if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
             if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
                 inrightwall = true;
@@ -99,7 +102,7 @@ void logic(){
                 bspeed.x = 0;
             }
         }
-
+        //left collison
         if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
             if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
                 float move_amount = -(objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
@@ -110,7 +113,33 @@ void logic(){
                 bspeed.x = 0;
             }
         }
+        //top collision
+        /*if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
+            if((screenheight/2)-ballsize < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)-ballsize > objects[s]->getPosition().y){
+                std::cout <<"hit roof\n";
+                float move_amount = ((objects[s]->getPosition().y) + ((screenheight/2)+ballsize));
+                for(int o = 0; o < objects.size(); o++){
+                    objects[o]->move(0, move_amount);
+                }
+                bspeed.y = 0;
+            }
+            
+        }
+        */
+
+       if(screenwidth/2 > objects[s]->getPosition().x && screenwidth/2 < objects[s]->getPosition().x + objects[s]->getSize().x){
+            if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
+                std::cout << "hit roof\n";
+                float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
+                for(int o = 0; o < objects.size(); o++){
+                    objects[o]->move(0,move_amount);
+                    bspeed.y = 0;
+                }
+            }
+       }
     }
+    
+
     if (!touching_ground){
         bspeed.y+=gravity;
     }
