@@ -30,16 +30,15 @@ void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int 
 int main(){
     /////SETUP/////////
     loadobjects();
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Blue Ballz - MrKeviscool", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Momentum", sf::Style::Fullscreen);
     if(!balltex.loadFromFile("./textures/blueball.png")){
         std::cout << "error loading texture\n";
         return 0;
     }
     balltex.setSmooth(true);
     ball.setTexture(&balltex);
-    //bpos = sf::Vector2f(1920/2, 1080/2/*1080-(100+(ballsize/2) )+10*/);
     ball.setOrigin(ballsize, ballsize);
-    ball.setPosition(1920/2, 1080/2);
+    ball.setPosition(screenwidth/2, screenheight/2);
     ///////END SETUP//////////
         while(window.isOpen()){ 
         sf::Event event;

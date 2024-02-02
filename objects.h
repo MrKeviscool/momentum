@@ -8,6 +8,7 @@ sf::RectangleShape leftwall(sf::Vector2f(50, 300));
 sf::RectangleShape box1(sf::Vector2f(50,50));
 sf::RectangleShape lowfloor(sf::Vector2f(300, 50));
 sf::RectangleShape box2(sf::Vector2f(50, 50));
+
 std::vector<sf::RectangleShape*> objects = {&Floor, &wallright, &anotherfloor, &leftwall, &box1, &box2};
 
 void loadobjects(){
