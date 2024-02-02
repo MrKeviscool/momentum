@@ -17,6 +17,8 @@
 #define jumpheight 6
 #define fps 125
 
+int level = 1;
+
 float rotation = 0;
 bool touching_ground = false;
 sf::Texture balltex;
@@ -29,7 +31,7 @@ sf::CircleShape ball(ballsize);
 void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime);
 int main(){
     /////SETUP/////////
-    loadobjects();
+    loadlevel(level);
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Momentum", sf::Style::Fullscreen);
     if(!balltex.loadFromFile("./textures/blueball.png")){
         std::cout << "error loading texture\n";
