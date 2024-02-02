@@ -26,7 +26,7 @@ sf::Vector2f bspeed;
 sf::CircleShape ball(ballsize);
 
 
-void calculaterotation(), display(sf::RenderWindow &window), logic(), delay();
+void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime);
 int main(){
     /////SETUP/////////
     loadobjects();
@@ -50,9 +50,11 @@ int main(){
             }
         }
         ////////LOOP//////////
+        std::chrono::steady_clock::time_point starttime = std::chrono::steady_clock::now();
         logic();
         display(window);
-        delay();
+        std::chrono::steady_clock::time_point endtime = std::chrono::steady_clock::now();
+        delay(std::chrono::duration_cast<std::chrono::milliseconds> (endtime - starttime).count());
         //////END LOOP////////
     }
 }
@@ -147,7 +149,7 @@ void display(sf::RenderWindow &window){
     window.display();
 }
 
-void delay(){ 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000/fps));
+void delay(int delaytime){ 
+    std::this_thread::sleep_for(std::chrono::milliseconds((1000/fps)-delaytime));
     return;
 }
