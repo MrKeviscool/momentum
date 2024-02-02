@@ -76,7 +76,7 @@ void logic(){
     for(int s = 0; s < objects.size(); s++){
 
         //bottom collison
-        if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
+        if(((screenwidth/2) - (ballsize/2)) < (objects[s]->getSize().x + objects[s]->getPosition().x) && ((screenwidth/2) + (ballsize/2)) > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
@@ -114,22 +114,8 @@ void logic(){
             }
         }
         //top collision
-        /*if(screenwidth/2 < (objects[s]->getSize().x + objects[s]->getPosition().x) && screenwidth/2 > objects[s]->getPosition().x){
-            if((screenheight/2)-ballsize < (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)-ballsize > objects[s]->getPosition().y){
-                std::cout <<"hit roof\n";
-                float move_amount = ((objects[s]->getPosition().y) + ((screenheight/2)+ballsize));
-                for(int o = 0; o < objects.size(); o++){
-                    objects[o]->move(0, move_amount);
-                }
-                bspeed.y = 0;
-            }
-            
-        }
-        */
-
        if(screenwidth/2 > objects[s]->getPosition().x && screenwidth/2 < objects[s]->getPosition().x + objects[s]->getSize().x){
             if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
-                std::cout << "hit roof\n";
                 float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0,move_amount);
