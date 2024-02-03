@@ -17,7 +17,7 @@
 #define jumpheight 6
 #define fps 125
 
-int level = 2;
+int level = 3;
 
 float rotation = 0;
 bool touching_ground = false;

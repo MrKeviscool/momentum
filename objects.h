@@ -57,13 +57,23 @@ void loadlevel(int level)
     else if (level == 3){
         sf::RectangleShape *Floor = new sf::RectangleShape();
         sf::RectangleShape *spikes = new sf::RectangleShape();
+        sf::RectangleShape *stair1 = new sf::RectangleShape();
+        sf::RectangleShape *stair2 = new sf::RectangleShape();
+        sf::RectangleShape *stair3 = new sf::RectangleShape();
+        
         Floor->setSize(sf::Vector2f(2500, 80));
         Floor->setFillColor(sf::Color::Green);
         Floor->setPosition(-500, 1000);
         spikes->setSize(sf::Vector2f(50, 50));
         spikes->setFillColor(sf::Color::Red);
-        spikes->setPosition(300, 950);
-        objects = {Floor, spikes};
-        hurts = {false, true};
+        spikes->setPosition(550, 950);
+        stair3->setSize(sf::Vector2f(50, 50));
+        stair3->setPosition(500, 900);
+        stair2->setSize(sf::Vector2f(50, 50));
+        stair2->setPosition(450, 850);
+        stair1->setSize(sf::Vector2f(50, 50));
+        stair1->setPosition(400, 800);
+        objects = {Floor, spikes, stair1, stair2, stair3};
+        hurts = {false, true, false,false,false};
     }
 }
