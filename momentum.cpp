@@ -17,7 +17,7 @@
 #define jumpheight 6
 #define fps 125
 
-int level = 2;
+int level = 3;
 
 float rotation = 0;
 bool touching_ground = false;
@@ -28,7 +28,7 @@ sf::Vector2f bspeed;
 sf::CircleShape ball(ballsize);
 
 
-void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime);
+void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime), die();
 int main(){
     /////SETUP/////////
     loadlevel(level);
@@ -79,6 +79,7 @@ void logic(){
         //bottom collison
         if(((screenwidth/2) - (ballsize/2)) < (objects[s]->getSize().x + objects[s]->getPosition().x) && ((screenwidth/2) + (ballsize/2)) > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
+                if(hurts[s]){die();}
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0, move_amount);
@@ -95,6 +96,7 @@ void logic(){
         //right collison
         if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
             if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
+                if(hurts[s]){die();}
                 inrightwall = true;
                 float move_amount = -(objects[s]->getPosition().x - ((screenwidth/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
@@ -106,6 +108,7 @@ void logic(){
         //left collison
         if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
             if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
+                if(hurts[s]){die();}
                 float move_amount = -(objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
                 inleftwall = true;
                 for(int o = 0; o < objects.size(); o++){
@@ -117,6 +120,7 @@ void logic(){
         //top collision
        if(screenwidth/2 > objects[s]->getPosition().x && screenwidth/2 < objects[s]->getPosition().x + objects[s]->getSize().x){
             if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
+                if(hurts[s]){die();}
                 float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0,move_amount);
@@ -171,4 +175,8 @@ void display(sf::RenderWindow &window){
 void delay(int delaytime){ 
     std::this_thread::sleep_for(std::chrono::milliseconds((1000/fps)-delaytime));
     return;
+}
+
+void die(){
+    exit(0);
 }

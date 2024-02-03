@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <stdbool.h>
 
 std::vector<sf::RectangleShape *> objects;
+std::vector<bool> hurts;
 
 void loadlevel(int level)
 {
@@ -50,5 +52,17 @@ void loadlevel(int level)
         obj1->setPosition(650, 900);
 
         objects = {Floor, obj1, leftwall, rightwall};
+    }
+    else if (level == 3){
+        sf::RectangleShape *Floor = new sf::RectangleShape();
+        sf::RectangleShape *spikes = new sf::RectangleShape();
+        Floor->setSize(sf::Vector2f(2500, 80));
+        Floor->setFillColor(sf::Color::Green);
+        Floor->setPosition(-500, 1000);
+        spikes->setSize(sf::Vector2f(50, 50));
+        spikes->setFillColor(sf::Color::Red);
+        spikes->setPosition(300, 950);
+        objects = {Floor, spikes};
+        hurts = {false, true};
     }
 }
