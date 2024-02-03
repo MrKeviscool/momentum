@@ -27,8 +27,8 @@ void loadlevel(int level)
 
         obj1->setSize(sf::Vector2f(500, 50));
         obj1->setPosition(650, 800);
-
         objects = {Floor, obj1, leftwall, rightwall};
+        hurts = {false,false,false,false};
     }
     else if(level == 2){
         sf::RectangleShape *Floor = new sf::RectangleShape();
@@ -49,9 +49,10 @@ void loadlevel(int level)
         leftwall->setFillColor(sf::Color(158, 66, 245));
 
         obj1->setSize(sf::Vector2f(300, 50));
-        obj1->setPosition(650, 900);
+        obj1->setPosition(650, 850);
 
         objects = {Floor, obj1, leftwall, rightwall};
+        hurts = {false,false,false,false};
     }
     else if (level == 3){
         sf::RectangleShape *Floor = new sf::RectangleShape();

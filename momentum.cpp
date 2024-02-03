@@ -9,7 +9,7 @@
 
 #define screenwidth 1920
 #define screenheight 1080
-#define gravity 0.15//0.0784
+#define gravity 0.15
 #define ballsize 30
 #define speedcap 10
 #define decreasespeed 0.02
@@ -17,7 +17,7 @@
 #define jumpheight 6
 #define fps 125
 
-int level = 3;
+int level = 2;
 
 float rotation = 0;
 bool touching_ground = false;
@@ -77,7 +77,7 @@ void logic(){
     for(int s = 0; s < objects.size(); s++){
 
         //bottom collison
-        if(((screenwidth/2) - (ballsize/2)) < (objects[s]->getSize().x + objects[s]->getPosition().x) && ((screenwidth/2) + (ballsize/2)) > objects[s]->getPosition().x){
+        if((screenwidth/2) - (ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && (screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
                 if(hurts[s]){die();}
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
@@ -94,7 +94,7 @@ void logic(){
             
         }
         //right collison
-        if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
+        if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
             if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
                 if(hurts[s]){die();}
                 inrightwall = true;
@@ -106,7 +106,7 @@ void logic(){
             }
         }
         //left collison
-        if((screenheight/2) > objects[s]->getPosition().y && screenheight/2 < objects[s]->getPosition().y + objects[s]->getSize().y){
+        if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
             if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
                 if(hurts[s]){die();}
                 float move_amount = -(objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
@@ -118,7 +118,7 @@ void logic(){
             }
         }
         //top collision
-       if(screenwidth/2 > objects[s]->getPosition().x && screenwidth/2 < objects[s]->getPosition().x + objects[s]->getSize().x){
+       if((screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x && (screenwidth/2) - (ballsize/2) < objects[s]->getPosition().x + objects[s]->getSize().x){
             if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
                 if(hurts[s]){die();}
                 float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
