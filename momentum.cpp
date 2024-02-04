@@ -17,7 +17,7 @@
 #define jumpheight 6
 #define fps 125
 
-int level = 3;
+int level = 1;
 
 float rotation = 0;
 bool touching_ground = false;
@@ -28,7 +28,7 @@ sf::Vector2f bspeed;
 sf::CircleShape ball(ballsize);
 
 
-void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime), die();
+void calculaterotation(), display(sf::RenderWindow &window), logic(), delay(int delaytime), die(), win();
 int main(){
     /////SETUP/////////
     loadlevel(level);
@@ -80,6 +80,7 @@ void logic(){
         if((screenwidth/2) - (ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && (screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x){
             if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
                 if(hurts[s]){die();}
+                if(s == 0){win();}
                 float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0, move_amount);
@@ -97,6 +98,7 @@ void logic(){
         if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
             if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
                 if(hurts[s]){die();}
+                if(s == 0){win();}
                 inrightwall = true;
                 float move_amount = -(objects[s]->getPosition().x - ((screenwidth/2)+ballsize));
                 for(int o = 0; o < objects.size(); o++){
@@ -109,6 +111,7 @@ void logic(){
         if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
             if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
                 if(hurts[s]){die();}
+                if(s == 0){win();}
                 float move_amount = -(objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
                 inleftwall = true;
                 for(int o = 0; o < objects.size(); o++){
@@ -121,6 +124,7 @@ void logic(){
        if((screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x && (screenwidth/2) - (ballsize/2) < objects[s]->getPosition().x + objects[s]->getSize().x){
             if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
                 if(hurts[s]){die();}
+                if(s == 0){win();}
                 float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
                 for(int o = 0; o < objects.size(); o++){
                     objects[o]->move(0,move_amount);
@@ -179,4 +183,11 @@ void delay(int delaytime){
 
 void die(){
     exit(0);
+}
+
+void win(){
+    std::cout << "YOU WIN!!! \n";
+    std::cout << "DOOD YOU LITERALLY WON IN A GAME WITH NO ENDING YET?!?!?! WHAARRRR\n";
+    exit(0);
+
 }
