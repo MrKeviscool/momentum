@@ -17,13 +17,19 @@ void loadlevel(int level)
         spike_pit->setFillColor(sf::Color::Red);
 
         ground_left->setPosition(-200, 700);
-        ground_right->setPosition(1200, 700);
-        back_wall->setPosition(-200, 700);
-        spike_pit->setPosition(1140, 800);
+        ground_right->setPosition(1600, 700);
+        back_wall->setPosition(-200, 300);
+        spike_pit->setPosition(1040, 800);
+        finish_line->setPosition(2000, 500);
 
-        ground_left->setSize(sf::Vector2f(1340, 300));
-        objects = {ground_left};
-        hurts = {false};
+        ground_left->setSize(sf::Vector2f(1240, 300));
+        ground_right->setSize(sf::Vector2f(500, 300));
+        back_wall->setSize(sf::Vector2f(100, 500));
+        spike_pit->setSize(sf::Vector2f(560, 200));
+        finish_line->setSize(sf::Vector2f(100, 200));
+
+        objects = {ground_left, ground_right, back_wall, spike_pit};
+        hurts = {false, false, false, true};
 
     }
     else{
