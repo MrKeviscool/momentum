@@ -23,7 +23,7 @@ float rotation = 0;
 bool touching_ground = false;
 sf::Texture balltex;
 
-sf::Vector2f bpos;
+//sf::Vector2f bpos;
 sf::Vector2f bspeed;
 sf::CircleShape ball(ballsize);
 
@@ -186,8 +186,8 @@ void die(){
 }
 
 void win(){
-    std::cout << "YOU WIN!!! \n";
-    std::cout << "DOOD YOU LITERALLY WON IN A GAME WITH NO ENDING YET?!?!?! WHAARRRR\n";
-    exit(0);
+    bspeed = sf::Vector2f(0, 0);
+    level++;
+    loadlevel(level);
 
 }
