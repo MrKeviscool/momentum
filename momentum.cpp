@@ -182,7 +182,8 @@ void delay(int delaytime){
 }
 
 void die(){
-    exit(0);
+    bspeed = sf::Vector2f(0,0);
+    loadlevel(level);
 }
 
 void win(){
