@@ -33,9 +33,6 @@ void loadlevel(int level)
         moveblocks();
 
     }
-    /*if(level == 2){
-        
-    }*/
     else{
         std::cout << "not a level yet :(\n";
         exit(0);
