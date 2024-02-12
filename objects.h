@@ -32,6 +32,9 @@ void loadlevel(int level)
         hurts = {false, false, false, true};
 
     }
+    /*if(level == 2){
+        
+    }*/
     else{
         std::cout << "not a level yet :(\n";
         exit(0);
