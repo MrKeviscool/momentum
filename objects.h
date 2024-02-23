@@ -33,12 +33,22 @@ void loadlevel(int level)
         moveblocks();
 
     }
+    if(level == 2){
+        sf::RectangleShape *ground = new sf::RectangleShape();
+        sf::RectangleShape *back_wall = new sf::RectangleShape();
+        sf::RectangleShape *spike1 = new sf::RectangleShape();
+        sf::RectangleShape *spike2 = new sf::RectangleShape();
+        sf::RectangleShape *spike3 = new sf::RectangleShape();
+        sf::RectangleShape *spike4 = new sf::RectangleShape();
+        ground->setPosition(-7, 20);
+        back_wall->setPosition(-7, 10);        
+    }
     else{
         std::cout << "not a level yet :(\n";
         exit(0);
     }
 }
- 
+
 void moveblocks(){
     objects.insert(objects.begin(), finish_line);
     hurts.insert(hurts.begin(), false);
