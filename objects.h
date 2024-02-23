@@ -38,7 +38,7 @@ void loadlevel(int level)
         exit(0);
     }
 }
-
+ 
 void moveblocks(){
     objects.insert(objects.begin(), finish_line);
     hurts.insert(hurts.begin(), false);
