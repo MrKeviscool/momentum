@@ -17,7 +17,7 @@
 #define jumpheight 6
 #define fps 125
 
-int level = 1;
+int level = 3;
 
 float rotation = 0;
 bool touching_ground = false;
@@ -73,10 +73,16 @@ void calculaterotation(){
 
 void logic(){
     for(int i = 0; i < objects.size(); i++){
-        if(screenwidth/2){
-            
+        for(double point_on_circ = 0; point_on_circ <= 2 * M_PI; point_on_circ+=1){
+            double xpoint = (screenwidth/2 + ballsize/2) * cos(point_on_circ);
+            double ypoint = (screenheight/2 + ballsize/2) * sin(point_on_circ);
+            if(xpoint >= objects[i]->getPosition().x && xpoint <= objects[i]->getPosition().x + objects[i]->getSize().x && ypoint >= objects[i]->getPosition().y && ypoint <= objects[i]->getPosition().y + objects[i]->getSize().y){
+                std::cout << "in object!!";
+                exit(0);
+            }
         }
     }
+    bspeed.y += 0.5;
     for(int i = 0; i < objects.size(); i++){
         objects[i]->move(-bspeed);
     }

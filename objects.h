@@ -33,7 +33,7 @@ void loadlevel(int level)
         moveblocks();
 
     }
-    if(level == 2){
+    else if(level == 2){
         sf::RectangleShape *ground = new sf::RectangleShape();
         sf::RectangleShape *back_wall = new sf::RectangleShape();
         sf::RectangleShape *spike1 = new sf::RectangleShape();
@@ -59,6 +59,17 @@ void loadlevel(int level)
         hurts = {false, false, true,true,true,true};
         moveblocks();
 
+    }
+    else  if(level == 3){
+        sf::RectangleShape *ground_left = new sf::RectangleShape();
+        sf::RectangleShape *randomblock = new sf::RectangleShape();
+        randomblock->setPosition(10, 40);
+        ground_left->setPosition(0, 80);
+        ground_left->setSize(sf::Vector2f(40, 6));
+        randomblock->setSize(sf::Vector2f(3, 10));
+        objects = {ground_left, randomblock};
+        hurts = {false, false};
+        moveblocks();
     }
     else{
         std::cout << "not a level yet :(\n";
