@@ -40,8 +40,25 @@ void loadlevel(int level)
         sf::RectangleShape *spike2 = new sf::RectangleShape();
         sf::RectangleShape *spike3 = new sf::RectangleShape();
         sf::RectangleShape *spike4 = new sf::RectangleShape();
-        ground->setPosition(-7, 20);
-        back_wall->setPosition(-7, 10);        
+        ground->setPosition(0, 20);
+        back_wall->setPosition(0, 10);
+        spike1->setPosition(35, 15);
+        spike2->setPosition(42, 15);
+        spike3->setPosition(49, 15);
+        spike4->setPosition(66, 15);
+
+        ground->setSize(sf::Vector2f(40, 6));
+        back_wall->setSize(sf::Vector2f(3, 16));
+        spike1->setSize(sf::Vector2f(3.5, 5));
+        spike2->setSize(sf::Vector2f(3.5, 5));
+        spike3->setSize(sf::Vector2f(3.5, 5));
+        spike4->setSize(sf::Vector2f(3.5, 5));
+        finish_line->setPosition(40, 13);
+        finish_line->setSize(sf::Vector2f(3, 8));
+        objects = {ground, back_wall, spike1,spike2,spike3,spike4};
+        hurts = {false, false, true,true,true,true};
+        moveblocks();
+
     }
     else{
         std::cout << "not a level yet :(\n";
@@ -55,5 +72,6 @@ void moveblocks(){
     for(int i = 0; i < objects.size(); i++){
         objects[i]->setPosition(objects[i]->getPosition().x * blocksize, objects[i]->getPosition().y * blocksize);
         objects[i]->setSize(sf::Vector2f(objects[i]->getSize().x * blocksize, objects[i]->getSize().y * blocksize));
+        if(hurts[i] == true){objects[i]->setFillColor(sf::Color::Red);}
     }
 }
