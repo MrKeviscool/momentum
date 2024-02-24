@@ -72,93 +72,9 @@ void calculaterotation(){
 }
 
 void logic(){
-    touching_ground = false;
-    bool inrightwall = false, inleftwall = false;
-    for(int s = 0; s < objects.size(); s++){
-
-        //bottom collison
-        if((screenwidth/2) - (ballsize/2) < (objects[s]->getSize().x + objects[s]->getPosition().x) && (screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x){
-            if((screenheight/2)+ballsize <= (objects[s]->getSize().y + objects[s]->getPosition().y) && (screenheight/2)+ballsize >= objects[s]->getPosition().y){
-                if(hurts[s]){die();}
-                if(s == 0){win();}
-                float move_amount = -(objects[s]->getPosition().y - ((screenheight/2)+ballsize));
-                for(int o = 0; o < objects.size(); o++){
-                    objects[o]->move(0, move_amount);
-                }
-                bspeed.y = 0;
-                touching_ground = true;
-            }
-            /*else if(objects[s]->getPosition().y == 570){
-                touching_ground = true;
-                bspeed.y = 0;
-            }*/
+    for(int i = 0; i < objects.size(); i++){
+        if(screenwidth/2){
             
-        }
-        //right collison
-        if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
-            if(((screenwidth/2) + ballsize) > objects[s]->getPosition().x && ((screenwidth/2)+ballsize) < objects[s]->getPosition().x + objects[s]->getSize().x){
-                if(hurts[s]){die();}
-                if(s == 0){win();}
-                inrightwall = true;
-                float move_amount = -(objects[s]->getPosition().x - ((screenwidth/2)+ballsize));
-                for(int o = 0; o < objects.size(); o++){
-                    objects[o]->move(move_amount,0);
-                }
-                bspeed.x = 0;
-            }
-        }
-        //left collison
-        if((screenheight/2) + (ballsize/2) > objects[s]->getPosition().y && (screenheight/2) - (ballsize/2) < objects[s]->getPosition().y + objects[s]->getSize().y){
-            if((screenwidth/2) - ballsize > objects[s]->getPosition().x && (screenwidth/2) - ballsize < objects[s]->getPosition().x + objects[s]->getSize().x){
-                if(hurts[s]){die();}
-                if(s == 0){win();}
-                float move_amount = -(objects[s]->getPosition().x+objects[s]->getSize().x - ((screenwidth/2)-ballsize));
-                inleftwall = true;
-                for(int o = 0; o < objects.size(); o++){
-                    objects[o]->move(move_amount,0);
-                }
-                bspeed.x = 0;
-            }
-        }
-        //top collision
-       if((screenwidth/2) + (ballsize/2) > objects[s]->getPosition().x && (screenwidth/2) - (ballsize/2) < objects[s]->getPosition().x + objects[s]->getSize().x){
-            if((screenheight/2)-ballsize > objects[s]->getPosition().y && (screenheight/2)-ballsize < objects[s]->getPosition().y + objects[s]->getSize().y){
-                if(hurts[s]){die();}
-                if(s == 0){win();}
-                float move_amount = ( (objects[s]->getPosition().y + objects[s]->getSize().y) - ((screenheight/2)));
-                for(int o = 0; o < objects.size(); o++){
-                    objects[o]->move(0,move_amount);
-                    bspeed.y = 0;
-                }
-            }
-       }
-    }
-    
-
-    if (!touching_ground){
-        bspeed.y+=gravity;
-    }
-        
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& !sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && bspeed.x < speedcap && !inrightwall &&touching_ground){
-        bspeed.x+=increasespeed;
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && bspeed.x > -speedcap && !inleftwall &&touching_ground){
-       bspeed.x-=increasespeed;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&touching_ground){
-        bspeed.y -= jumpheight;
-        touching_ground = false;
-    }
-    else if(bspeed.x > 0 && touching_ground){
-        bspeed.x -= decreasespeed;
-        if(bspeed.x <= decreasespeed){
-            bspeed.x = 0.0;
-        }
-    }
-    else if (bspeed.x < 0 && touching_ground){
-        bspeed.x += decreasespeed;
-        if(bspeed.x >= -decreasespeed){
-            bspeed.x = 0.0;
         }
     }
     for(int i = 0; i < objects.size(); i++){
