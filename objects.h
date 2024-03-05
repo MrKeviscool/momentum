@@ -65,7 +65,7 @@ void loadlevel(int level)
         sf::RectangleShape *randomblock = new sf::RectangleShape();
         randomblock->setPosition(10, 40);
         ground_left->setPosition(0, 80);
-        ground_left->setSize(sf::Vector2f(40, 6));
+        ground_left->setSize(sf::Vector2f(31.5, 6));
         randomblock->setSize(sf::Vector2f(3, 10));
         objects = {ground_left, randomblock};
         hurts = {false, false};

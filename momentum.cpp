@@ -72,22 +72,27 @@ void calculaterotation(){
 }
 
 void logic(){
-    bool rungravity = true;
+    bool touchingound = false;
     for(int i = 0; i < objects.size(); i++){
         for(double point_on_circ = 0; point_on_circ <= 2 * M_PI; point_on_circ+=1){
             double xpoint = (screenwidth/2 + ballsize/2) * cos(point_on_circ);
             double ypoint = (screenheight/2 + ballsize/2) * sin(point_on_circ);
             //if(xpoint >= objects[i]->getPosition().x && xpoint <= objects[i]->getPosition().x + objects[i]->getSize().x && ypoint >= objects[i]->getPosition().y && ypoint <= objects[i]->getPosition().y + objects[i]->getSize().y){}
 
-            
-
-            if(ypoint >= objects[i]->getPosition().y){
-                rungravity = false;
+            //bottom collision:
+            if(ypoint >= objects[i]->getPosition().y && xpoint > objects[i]->getPosition().x && xpoint < objects[i]->getPosition().x + objects[i]->getSize().x){
+                touching_ground = true;
+                objects[i]->move(0, ypoint-objects[i]->getPosition().y);
+                std::cout << "touching ground\n";
             }
+
+
+
         }
     }
-    if(rungravity){
-        bspeed.y += gravity;}
+    if(!touching_ground){
+        bspeed.y += gravity;
+    }
     for(int i = 0; i < objects.size(); i++){
         objects[i]->move(-bspeed);
     }
